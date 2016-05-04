@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nodemailer = require("nodemailer");
+var mongoose = require("mongoose");
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -32,6 +33,16 @@ app.use(express.static(path.join(__dirname, 'public')));
     STMP is mail server which is responsible for sending and recieving email.
 */
 
+mongoose.connect('mongodb://stockdatauserdb:whee1234@ds032319.mlab.com:32319/accountdatabase');
+
+var Schema = mongoose.Schema;
+
+var personSchema = new Schema({
+    User: String
+});
+
+var Person = mongoose.model('Person', personSchema);
+
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: "Gmail",
     auth: {
@@ -44,17 +55,36 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
 /*------------------Routing Started ------------------------*/
 
 
-app.get('/send', function (req, res) {
+app.get('/send', function(req, res) {
     var mailOptions = {
-        to : req.query.to,
-        subject : 'Agora Finance',
-        text : 'We will email you when the site is finished.'
+        to: req.query.to,
+        subject: 'Agora Finance',
+        text: 'We will email you when the site is finished.'
     }
-    smtpTransport.sendMail(mailOptions, function (error, response) {
+    smtpTransport.sendMail(mailOptions, function(error, response) {
         if (error) {
             console.log(error);
             res.end("error");
         } else {
+            console.log(typeof req.query.to)
+            Person.findOne({
+                "User": req.query.to
+            }, function(err, doc) {
+                if (doc) {
+                    console.log("Username already created");
+                    //later send a variable to the local file to say that "Youre already on are list!"
+                } else {
+
+                    var Email = Person({
+
+                        User: req.query.to
+
+                    });
+                    Email.save(function(err) {
+                        if (err) throw err;
+                    })
+                }
+            });
             console.log("Message sent: " + response.message);
             res.end("sent");
         }
