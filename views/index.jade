@@ -23,7 +23,7 @@ html(lang='en')
       $("#message").empty().html(data);
       });
       to=$("#to").val();
-      $.get("http://localhost:5000/send",{to:to,subject:subject,text:text},function(data){
+      $.get("http://www.stockdata.trade/send",{to:to,subject:subject,text:text},function(data){
       //if(data=="sent")
       //{
       //console.log("data sent")
