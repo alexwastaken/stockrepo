@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
     STMP is mail server which is responsible for sending and recieving email.
 */
 
+
 mongoose.connect('mongodb://stockdatauserdb:whee1234@ds032319.mlab.com:32319/accountdatabase');
 
 var Schema = mongoose.Schema;
@@ -53,42 +54,55 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
 /*------------------SMTP Over-----------------------------*/
 
 /*------------------Routing Started ------------------------*/
-
+var check;
 
 app.get('/send', function(req, res) {
+    //later what you need to do is not send another email if the email is already in the database
     var mailOptions = {
         to: req.query.to,
         subject: 'Agora Finance',
         text: 'We will email you when the site is finished.'
     }
-    smtpTransport.sendMail(mailOptions, function(error, response) {
-        if (error) {
-            console.log(error);
-            res.end("error");
+    Person.findOne({
+        "User": req.query.to
+    }, function(err, doc) {
+        if (doc) {
+        	console.log(req.query.to)
+        	check = "It look like you're already in our database!";
         } else {
-            console.log(typeof req.query.to)
-            Person.findOne({
-                "User": req.query.to
-            }, function(err, doc) {
-                if (doc) {
-                    console.log("Username already created");
-                    //later send a variable to the local file to say that "Youre already on are list!"
+        	check = "We just sent you an email! Please check your inbox.";
+
+            var Email = Person({
+
+                User: req.query.to
+
+            });
+            Email.save(function(err) {
+                if (err) throw err;
+            });
+            smtpTransport.sendMail(mailOptions, function(error, response) {
+                if (error) {
+                    console.log(error);
+                    res.end("error");
                 } else {
-
-                    var Email = Person({
-
-                        User: req.query.to
-
-                    });
-                    Email.save(function(err) {
-                        if (err) throw err;
-                    })
+                    console.log(typeof req.query.to)
+                    console.log("Message sent: " + response.message);
+                    res.end("sent");
                 }
             });
-            console.log("Message sent: " + response.message);
-            res.end("sent");
         }
     });
+});
+
+app.get('/checkemaildata', function(req, res) {
+	var checkloop = setInterval(function(){
+		if(check != "nothing" && check){
+			console.log("running")
+			res.send(check);
+			check = "nothing";
+			clearInterval(checkloop);
+		}
+	}, 10);
 });
 
 /*--------------------Routing Over----------------------------*/

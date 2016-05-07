@@ -4,29 +4,32 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='description', content='')
-    title LANDON - Free Bootstrap 3 Landing Page
+    title stockdata
     link(href='css/bootstrap.css', rel='stylesheet')
     link(href='css/main.css', rel='stylesheet')
     //
       if lt IE 9
       script(src='js/html5shiv.js')
       script(src='js/respond.min.js')
-    link(rel='shortcut icon', href='images/favicon.png')
+    link(rel='shortcut icon', href='images/favicon.ico')
     script(src='js/pace.js')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:300,600', rel='stylesheet', type='text/css')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
     script.
-      // <![CDATA[
       $(document).ready(function(){
       var from,to,subject,text;
       $("#send_email").click(function(){
+      $.get("http://www.stockdata.trade/checkemaildata", function(data){
+      $("#message").empty().html(data);
+      });
       to=$("#to").val();
-      $.get("http://www.stockdata.trade/send",{to:to,subject:subject,text:text},function(data){
+      $.get("http://localhost:5000/send",{to:to,subject:subject,text:text},function(data){
       //if(data=="sent")
       //{
+      //console.log("data sent")
+      //$("#message").empty().html(" Email is been sent at "+to+".");
       //}
       });
-      $("#message").empty().html(" Email is been sent at "+to+".");
       });
       });
   body
@@ -34,94 +37,94 @@ html(lang='en')
     main#top.masthead(role='main')
       .container
         .logo
-          a(href='index.html#')
+          a(href='http://www.stockdata.trade/')
             img(src='images/logo.png', alt='logo')
         h1
-          | The Most Handsome and 
-          strong Powerful Way
+          | From 
+          strong WallStreet
+          |  To Your 
+          strong Desktop
           br
-          | 			to 
-          strong launch
-          |  your product.
+          |         Site Coming Soon
         .row
           .col-md-6.col-sm-12.col-md-offset-3.subscribe
             .form-group
               .col-md-7.col-sm-6.col-sm-offset-1.col-md-offset-0
                 input#to.form-control.input-lg(type='text', placeholder='Enter E-mail ID where you want to send', required='required')
               .col-md-5.col-sm-4
-                button#send_email.btn.btn-success.btn-lg Send Email
-            span#message.alertMsg
+                button#send_email.btn.btn-success.btn-lg GET EARLY ACCESS
+              span#message.alertMsg
           a.scrollto(href='index.html#explore')
             p SCROLL DOWN TO EXPLORE
             p.scrollto--arrow
               img(src='images/scroll_down.png', alt='scroll down arrow')
     #explore.container
       .section-title
-        h2 Showcase your product with style.
-        h4 This theme is ideal for your Web Project or your App.
+        h2 All the stock info you need, simplified.
+        h4 Invest just like the Professionals.
       section.row.heroimg.breath
         .col-md-12.text-center
           img(src='images/flat-mockup-template.png', alt='flat-mockup-template')
       .section-title
-        h2 More information about your product.
-        h4 Always detail some important features.
+        h2 Stockdata has many features built-in.
+        h4 Fine tuned and customizable.
       section.row.features
         .col-sm-6.col-md-3
           .thumbnail
             img(src='images/service_01.png', alt='analytics-icon')
             .caption
-              h3 Important Feature 1
-              p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              h3 News
+              p We scrape thousands of articles and show you the ones that really matter.
         .col-sm-6.col-md-3
           .thumbnail
             img(src='images/service_02.png', alt='analytics-icon')
             .caption
-              h3 Important Feature 2
-              p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              h3 Metrics
+              p Metrics allows you to see the most important stock data and information.
         .col-sm-6.col-md-3
           .thumbnail
             img(src='images/service_03.png', alt='analytics-icon')
             .caption
-              h3 Important Feature 3
-              p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              h3 Price
+              p
+                | With our easy to use graph, you can see the price go up and down and know why it did so.
         .col-sm-6.col-md-3
           .thumbnail
             img(src='images/service_04.png', alt='analytics-icon')
             .caption
-              h3 Important Feature 4
-              p Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+              h3 Analytics
+              p Get a thourough look at all the stock data you could possibly need.
       .section-title
-        h2 Some of our clients
-        h4 We work with different kind of brands
+        h2 Some of our featured stocks.
+        h4 We provide almost every stock on the market.
       section.row.clientlogo.breath
         .col-md-12.text-center
           img(src='images/client-logos.png', alt='client-logos')
     .highlight.testimonials
       .container
         .section-title
-          h2 What our customers said
-          h4 Don't take our word. See our testimonials 
+          h2 What our CEO and Founder have to say.
         section.row.breath
           .col-md-6
             .testblock
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              | “Before stockdata.trade, there really wasn't an easy way to invest. With the ability to look at the stock market through the eyes of a professional investor, anyone can invest and make money. We do the hard work for you!”
             .clientblock
               img(src='images/customer-img-1.jpg', alt='.')
               p
-                strong John Doe
+                strong Alex Parsons
                 br
-                | 								Founder of 
-                a(href='index.html#') Blacktie.co
+                |                 Founder of 
+                a(href='http://stockdata.trade/') stockdata.trade
           .col-md-6
             .testblock
-              | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              | “Before stockdata.trade, there really wasn't an easy way to invest. With the ability to look at the stock market through the eyes of a professional investor, anyone can invest and make money. We do the hard work for you!”
             .clientblock
               img(src='images/customer-img-2.jpg', alt='.')
               p
-                strong Richard Sommer
+                strong Alex Parsons
                 br
-                | 								CEO of 
-                a(href='index.html#') Blacktie.co
+                |                 CEO of 
+                a(href='http://stockdata.trade/') stockdata.trade
     .container
       .section-title
         h2 Honest pricing. No surprises.
@@ -132,7 +135,7 @@ html(lang='en')
             .planname Personal
             .price
               span.curr $
-              | 14
+              | 5
               span.per /MO
             .billing Billed Annually
         .col-md-4
@@ -140,7 +143,7 @@ html(lang='en')
             .planname Agency
             .price
               span.curr $
-              | 49
+              | 10
               span.per /MO
             .billing Billed Annually
         .col-md-4
@@ -148,7 +151,7 @@ html(lang='en')
             .planname Enterprise
             .price
               span.curr $
-              | 99
+              | 20
               span.per /MO
             .billing Billed Annually
       // /section planpricing
@@ -156,34 +159,34 @@ html(lang='en')
         h5 Frequently Asked Questions
       section.row.faq.breath
         .col-md-6
-          h6 How does the free trial work?
+          h6 Can I still use the site if I dont want to pay?
           p
-            | Our 10 day trial is 100% free and does not require credit card information to start. If at the end of your trial you would like to upgrade, great. If not, you can cancel your account altogether, or let us mark it as inactive for you to come back to later.
-          h6 Can I switch plans later?
+            | Absolutely! This site is completely free. The personal plan simply gives you access to our mobile application and will take away the ads from the website. This site will always be free and you will never be required to pay a penny our of your pocket
+          h6 Can I cancel my plans?
           p
-            | Absolutely. You can switch between our paid plans, or cancel your account altogether, whenever you like. We will adjust any payments accordingly.
+            | Yes you can. When the site has been launched there will be a one click cancel feature for any plans that you purchase for the site! You will be completely refunded whether you used paypal or a credit provider. Please allow
+            | up to one day for the transaction to complete
         .col-md-6
-          h6 Do I need to choose a plan now?
+          h6 When will the site be up?
           p
-            | No. You get the full featured, unlimited version of our service completely free for 10 days. Once you're ready to upgrade, you may choose a plan which suits your needs.
-          h6 What payment types do you accept?
+            | This is a very large and intuitive site for one person to make. I would estimate somewhere between 3-6 months max. If you are interested in being notified when the site is live please enter your email above.
+          h6 Do I need to register my email to use the site when it comes out?
           p
-            | We accept payments from MasterCard, Visa, Visa Debit and American Express. We do not accept PayPal. Remember, you do not need to supply card details to start your free trial.
+            | When the site is up, it will initially be released as an alpha version. Those who are in our database will be granted early access to the site. Early access will allow your voice to be heard as we will be asking our users how we can improve the site to their needs!
     main.footercta(role='main')
       .container
         h1
-          | The Most Simple & 
-          strong Powerful Way
+          | Stockdata is the 
+          strong easiest
           br
-          | 					to 
-          strong launch
-          |  your product
+          |           way to start investing.
         .row
           .col-md-12.breath.text-center
-            a.btn.btn-success.btn-lg.gototop(href='index.html#top') GET EARLY ACCESS
+            a.btn.btn-success.btn-lg.gototop(href='http://www.stockdata.trade/#top') GET EARLY ACCESS
     .container
       section.row.breath
         .col-md-12.footerlinks
+          p © 2016 stockdata.trade All Rights Reserved
     script(src='js/jquery.js')
     script(src='js/bootstrap.js')
     script(src='js/easing.js')
