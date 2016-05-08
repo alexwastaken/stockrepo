@@ -47,7 +47,7 @@ var Person = mongoose.model('Person', personSchema);
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: "Gmail",
     auth: {
-        user: "testnodetestemail@gmail.com",
+        user: "stockdatacontact@gmail.com",
         pass: "whee1234"
     }
 });
@@ -60,8 +60,8 @@ app.get('/send', function(req, res) {
     //later what you need to do is not send another email if the email is already in the database
     var mailOptions = {
         to: req.query.to,
-        subject: 'Agora Finance',
-        text: 'We will email you when the site is finished.'
+        subject: 'stockdata - Thanks',
+        text: 'Thanks for your interest. When the website is live we will send you a notification email. If you have any further question you can reply to this email.'
     }
     Person.findOne({
         "User": req.query.to
