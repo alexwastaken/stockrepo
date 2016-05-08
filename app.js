@@ -67,7 +67,7 @@ app.get('/send', function(req, res) {
         "User": req.query.to
     }, function(err, doc) {
         if (doc) {
-        	check = "It look like you're already in our database!";
+        	check = "It looks like you're already in our database!";
         } else {
         	check = "We just sent you an email! Please check your inbox.";
 
