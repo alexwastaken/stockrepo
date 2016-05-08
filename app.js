@@ -102,7 +102,7 @@ app.get('/checkemaildata', function(req, res) {
 			check = "nothing";
 			clearInterval(checkloop);
 		}
-	}, 10);
+	}, 500);
 });
 
 /*--------------------Routing Over----------------------------*/
