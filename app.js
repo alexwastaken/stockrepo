@@ -67,7 +67,6 @@ app.get('/send', function(req, res) {
         "User": req.query.to
     }, function(err, doc) {
         if (doc) {
-        	console.log(req.query.to)
         	check = "It look like you're already in our database!";
         } else {
         	check = "We just sent you an email! Please check your inbox.";
@@ -85,8 +84,6 @@ app.get('/send', function(req, res) {
                     console.log(error);
                     res.end("error");
                 } else {
-                    console.log(typeof req.query.to)
-                    console.log("Message sent: " + response.message);
                     res.end("sent");
                 }
             });
@@ -97,7 +94,6 @@ app.get('/send', function(req, res) {
 app.get('/checkemaildata', function(req, res) {
 	var checkloop = setInterval(function(){
 		if(check != "nothing" && check){
-			console.log("running")
 			res.send(check);
 			check = "nothing";
 			clearInterval(checkloop);
