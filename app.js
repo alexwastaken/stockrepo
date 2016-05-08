@@ -60,7 +60,7 @@ app.get('/send', function(req, res) {
     //later what you need to do is not send another email if the email is already in the database
     var mailOptions = {
         to: req.query.to,
-        subject: 'stockdata - Thanks',
+        subject: 'stockdata',
         text: 'Thanks for your interest. When the website is live we will send you a notification email. If you have any further question you can reply to this email.'
     }
     Person.findOne({
