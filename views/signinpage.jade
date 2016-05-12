@@ -1,0 +1,57 @@
+html
+  body
+    head
+      link(rel='stylesheet', type='text/css', href='css/signinpage.css')
+      script(src='http://code.jquery.com/jquery-latest.min.js', type='text/javascript')
+      script(src='js/signinpage.js')
+    img.logo(src='images/stockdatalogoblack.png', alt='stockdatalogo')
+    .form
+      ul.tab-group
+        li.tab.active
+          a(href='#signup') Sign Up
+        li.tab
+          a(href='#login') Log In
+      .tab-content
+        #signup
+          h1 Sign Up for Free
+          form.registerForm(action='/signup ', method='post')
+            .top-row
+              .field-wrap
+                label
+                  | First Name
+                  span.req *
+                input(type='text', name='firstname', required='', maxlength='20', autocomplete='off')
+              .field-wrap
+                label
+                  | Last Name
+                  span.req *
+                input(type='text', name='lastname', required='', maxlength='20', autocomplete='off')
+            .field-wrap
+              label
+                | Email Address
+                span.req *
+              input(type='email', name='email', required='', maxlength='50', autocomplete='off')
+            .field-wrap
+              label
+                | Set A Password
+                span.req *
+              input(type='password', name='password1', required='', maxlength='12', autocomplete='off')
+            button.button.button-block.registerButton(type='submit', value='Submit') Get Started
+        #login
+          h1 Welcome Back!
+          form.loginForm(action='/signin', method='post')
+            .field-wrap
+              label
+                | Email Address
+                span.req *
+              input(type='email', name='username', required='', maxlength='50', autocomplete='off')
+            .field-wrap
+              label
+                | Password
+                span.req *
+              input(type='password', name='password', required='', maxlength='12', autocomplete='off')
+            p.forgot
+              a(href='#') Forgot Password?
+            button.button.button-block.loginButton(type='submit', value='Submit') Log In
+      // tab-content
+    // /form

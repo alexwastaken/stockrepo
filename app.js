@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nodemailer = require("nodemailer");
 var mongoose = require("mongoose");
+var session = require('express-session');
+var bcrypt = require('bcryptjs')
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -25,6 +29,16 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true,
+    cookie: { maxAge : 3600000 }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Later figure out how to route /send below without putting it before / and /users
 
 
@@ -42,7 +56,16 @@ var personSchema = new Schema({
     User: String
 });
 
+var userDetailSchema = new Schema({
+    firstname: String,
+    lastname: String,
+    email: String,
+    password: String
+});
+
 var Person = mongoose.model('Person', personSchema);
+
+var User = mongoose.model('User', userDetailSchema);
 
 var smtpTransport = nodemailer.createTransport("SMTP", {
     service: "Gmail",
@@ -102,6 +125,66 @@ app.get('/checkemaildata', function(req, res) {
 });
 
 /*--------------------Routing Over----------------------------*/
+
+passport.use(new LocalStrategy(function(username, password, done) {
+    console.log(username);
+    console.log(password);
+  process.nextTick(function() {
+    User.findOne({
+      'email': username, 
+    }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+
+      if (!user) {
+        return done(null, false);
+      }
+
+      var result = bcrypt.compareSync(password, user.password);
+
+      if (result) {
+        console.log('Password Correct');
+        return done(null, user);
+      } else {
+        console.log('Password Incorrect')
+        return done(null, false);
+      }
+
+    });
+  });
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+
+app.post('/signin', passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/signin'
+}));
+
+app.post('/signup', function(req, res) {
+
+var userDetails = User({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password1, bcrypt.genSaltSync(10))
+
+    });
+
+    userDetails.save(function(err) {
+        if (err) throw err;
+    });
+
+    res.redirect('/signin')
+});
 
 app.use('/', routes);
 app.use('/users', users);
