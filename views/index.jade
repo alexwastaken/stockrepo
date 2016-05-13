@@ -1,5 +1,5 @@
 ﻿doctype html
-html(lang='en')
+html(lang='en', ng-app='myApp')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -12,6 +12,7 @@ html(lang='en')
       script(src='js/html5shiv.js')
       script(src='js/respond.min.js')
     link(rel='shortcut icon', href='images/favicon.ico')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js')
     script(src='js/pace.js')
     link(href='http://fonts.googleapis.com/css?family=Open+Sans:300,600', rel='stylesheet', type='text/css')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
@@ -39,13 +40,17 @@ html(lang='en')
         .logo
           a(href='http://www.stockdata.trade/')
             img(src='images/logo.png', alt='logo')
-        h1
-          | From 
-          strong WallStreet
-          |  To Your 
-          strong Desktop
-          br
-          |         Site Coming Soon
+        div(ng-controller='mainController')
+          script(src='js/app.js')
+          script.
+            var clientPeople = !{JSON.stringify(serverPeople)}
+          h1
+            | From 
+            strong WallStreet
+            |  To Your 
+            strong Desktop
+            br
+            |         Welcome {{ people }}!
         .row
           .col-md-6.col-sm-12.col-md-offset-3.subscribe
             .form-group

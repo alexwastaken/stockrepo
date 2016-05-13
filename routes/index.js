@@ -1,23 +1,17 @@
 ﻿var express = require('express');
 var router = express.Router();
 
+var people = ''
 
 /* GET home page. */
-router.get('/', ensureAuthenticated, function (req, res) {
-    res.render('index', { title: 'Express' });
+router.get('/', ensureAuthenticated, figureOutUser, function (req, res) {
+    res.render('index', { serverPeople: people });
 });
 
 router.get('/signin', function (req, res) {
 	res.render('signinpage');
 });
 
-router.get('/loginFailure', ensureAuthenticated, function(req, res, next) {
-  res.send('Failed to authenticate');
-});
-
-router.get('/loginSuccess', ensureAuthenticated, function(req, res, next) {
-  res.send('Successfully authenticated');
-});
 
 function ensureAuthenticated(req, res, next) {
   if(req.isAuthenticated()){
@@ -26,6 +20,12 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/signin');
     console.log('redirecting')
   }
+}
+
+function figureOutUser(req, res, next) {
+	people = req.user.firstname
+	next();
+	
 }
 
 module.exports = router;

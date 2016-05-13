@@ -145,6 +145,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 
       if (result) {
         console.log('Password Correct');
+        //send data to the client
         return done(null, user);
       } else {
         console.log('Password Incorrect')
@@ -183,7 +184,7 @@ var userDetails = User({
         if (err) throw err;
     });
 
-    res.redirect('/signin')
+    res.redirect('/signin');
 });
 
 app.use('/', routes);
