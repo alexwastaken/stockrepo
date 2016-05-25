@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title stockdata landing
+    link(rel='stylesheet', type='text/css', href='/css/stockdatalanding.css')
+    script(src='/js/stockdatalanding.js')
+  body#hideBottomScroll
+    .headerContent
+      .imageAlign
+        img#logo(src='/images/stockdatalogoblack.png')
+      #rightNav
+        ul.ulSettings
+          li.list
+            a.linkClass(href='https://www.robinhood.com/') Developers
+          li.list
+            a.linkClass(href='https://www.robinhood.com/') Contact
+          li.list
+            a.linkClass(href='https://www.robinhood.com/') FAQ
+        button.btn(type='button') SIGN IN
+    #headerAppear
+      .headerContent
+        .imageAlignAppear
+          img#logoAppear(src='/images/stockdatalogoblack.png')
+        #rightNavAppear
+          ul.ulSettingsAppear
+            li.list
+              a.linkClass(href='https://www.robinhood.com/') Developers
+            li.list
+              a.linkClass(href='https://www.robinhood.com/') Contact
+            li.list
+              a.linkClass(href='https://www.robinhood.com/') FAQ
+          button.btnAppear(type='button') SIGN IN
+    #top
+      .wrapper
+        img.iphoneWhite(src='https://d2ue93q3u507c2.cloudfront.net/assets/marketing/images/home/phone_frame_light.png')
+        p#title STOCKDATA
+        p#paragraph
+          | The Stock Information You Need.
+          br
+          | From Wall Street, To Your Desktop.
+          br
+          | Completely Free.
+        button.btnToSite(type='button', onclick="window.location.href='http://localhost:5000/homepage'") Continue To Site
+    #middle
+    #bottom

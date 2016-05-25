@@ -12,6 +12,13 @@ router.get('/signin', function (req, res) {
 	res.render('signinpage');
 });
 
+router.get('/landingpage', function (req, res) {
+  res.render('landingpage');
+});
+
+router.get('/homepage', function (req, res) {
+  res.render('homepage');
+});
 
 function ensureAuthenticated(req, res, next) {
   if(req.isAuthenticated()){
