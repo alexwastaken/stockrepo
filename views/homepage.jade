@@ -31,11 +31,15 @@ html
           input#username.boxSettings(type='text', name='user', placeholder='User')
           input#password.boxSettings(type='password', name='password', placeholder='Password')
         button.btnLogin(type='button', onclick="window.location.href='http://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link'") SIGN UP
+        p#or.underButtonText or
+        a#SignInDecoration(href='google.com')
+          p#SignIn.underButtonText sign in
       #grid
         #row1
           .box1
             img.imgLogo(src='http://logo.clearbit.com/spotify.com?size=80')
-          p.box1a
+          a(href='http://localhost:5000/stockpage')  
+            p.box1a
           .box2
             img.imgLogo(src='http://logo.clearbit.com/microsoft.com?size=80')
           p.box2a

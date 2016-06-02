@@ -4,7 +4,7 @@ var router = express.Router();
 var people = ''
 
 /* GET home page. */
-router.get('/', ensureAuthenticated, figureOutUser, function (req, res) {
+router.get('/signinTrail', ensureAuthenticated, figureOutUser, function (req, res) {
     res.render('index', { serverPeople: people });
 });
 
@@ -12,12 +12,16 @@ router.get('/signin', function (req, res) {
 	res.render('signinpage');
 });
 
-router.get('/landingpage', function (req, res) {
+router.get('/', function (req, res) {
   res.render('landingpage');
 });
 
 router.get('/homepage', function (req, res) {
   res.render('homepage');
+});
+
+router.get('/stockpage', function (req, res) {
+  res.render('stockpage');
 });
 
 function ensureAuthenticated(req, res, next) {

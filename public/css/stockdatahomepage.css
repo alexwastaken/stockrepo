@@ -499,3 +499,28 @@ input {
     line-height: normal;
     line-height: 32px\0/; /* for IE 8 */
 }
+
+.underButtonText {
+	font-family: DINWeb;
+	font-size: 12px;
+}
+
+#or {
+	text-align: center;
+	padding: 0 0 0 0;
+	margin: 4px 0 0 180px;
+}
+
+#SignInDecoration {
+	text-decoration: none;
+	color: #000;
+
+}
+
+#SignIn {
+	text-decoration: none;
+	text-align: center;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	margin: 1px 0 0 180px;
+}
