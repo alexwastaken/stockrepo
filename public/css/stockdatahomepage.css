@@ -475,7 +475,27 @@
 	margin: 25px 0 0 0;
 }
 
-.btnLogin {
+#usernameSignIn {
+	display: none;
+	position: relative;
+	margin: 90px 0 0 0;
+}
+
+#passwordSignIn {
+	display: none;
+	position: relative;
+	margin: 25px 0 0 0;
+}
+
+#btnLoginSignUp {
+	display: inline-block;
+}
+
+#btnLoginSignIn {
+	display: none;  
+}
+
+.btnStyle {
   cursor: pointer;
   border-radius: 7px;
   border-color: rgba(255, 255, 255, 0);
@@ -506,21 +526,28 @@ input {
 }
 
 #or {
+	cursor: default;
 	text-align: center;
 	padding: 0 0 0 0;
-	margin: 4px 0 0 180px;
+	margin: 4px 0 0 235px;
+	display: inline-block;
 }
 
-#SignInDecoration {
+#signInDecoration {
 	text-decoration: none;
 	color: #000;
 
 }
 
-#SignIn {
+#signIn {
 	text-decoration: none;
 	text-align: center;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
-	margin: 1px 0 0 180px;
+	margin: 1px 0 0 224px;
+	display: inline-block;
+}
+
+#signIn:hover {
+	cursor: pointer;
 }

@@ -5,7 +5,7 @@ var people = ''
 
 /* GET home page. */
 router.get('/signinTrail', ensureAuthenticated, figureOutUser, function (req, res) {
-    res.render('index', { serverPeople: people });
+    res.render('signinlanding', { serverPeople: people });
 });
 
 router.get('/signin', function (req, res) {

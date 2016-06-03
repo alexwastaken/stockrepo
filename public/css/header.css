@@ -18,10 +18,10 @@
     
 	border-radius: 50%;
 	border:5px solid #b4b4b4;
-	-webkit-transition: border-color .3s linear;
-	-moz-transition: border-color .3s linear;
-	-o-transition: border-color .3s linear;
-	transition: border-color .3s linear;
+	-webkit-transition: border-color .4s linear;
+	-moz-transition: border-color .4s linear;
+	-o-transition: border-color .4s linear;
+	transition: border-color .4s linear;
 }
 
 .round-button a:hover {
