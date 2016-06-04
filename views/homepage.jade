@@ -25,17 +25,20 @@ html
       p#homepageTitle Stockdata
       p#homepageBelowTitle1 From WallStreet to your Desktop
       #loginBody
-        form#form(action='')
-          input#fNameSettings.boxSettings(type='text', name='fname', placeholder='First')
-          input#lNameSettings.boxSettings(type='text', name='lname', placeholder='Last')
-          input#username.boxSettings(type='text', name='user', placeholder='User')
-          input#password.boxSettings(type='password', name='password', placeholder='Password')
-          input#usernameSignIn.boxSettings(type='text', name='userSignIn', placeholder='User')
-          input#passwordSignIn.boxSettings(type='password', name='passwordSignIn', placeholder='Password')
-        button#btnLoginSignUp.btnStyle(type='button', onclick="window.location.href='http://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link'") SIGN UP
-        button#btnLoginSignIn.btnStyle(type='button', onclick="window.location.href='http://stackoverflow.com/questions/2906582/how-to-create-an-html-button-that-acts-like-a-link'") SIGN IN
+        form#form1(action='/signup ', method='post')
+          input#fNameSettings.boxSettings(type='text', name='firstname', placeholder='First')
+          input#lNameSettings.boxSettings(type='text', name='lasname', placeholder='Last')
+          input#username.boxSettings(type='email', name='email', placeholder='User')
+          input#password.boxSettings(type='password', name='password1', placeholder='Password')
+        button#btnLoginSignUp.btnStyle(type='submit', value='Submit') SIGN UP
         p#or.underButtonText or
         p#signIn.underButtonText sign in
+        form#form2()
+          input#usernameSignIn.boxSettings(type='text', name='userSignIn', placeholder='User')
+          input#passwordSignIn.boxSettings(type='password', name='passwordSignIn', placeholder='Password')
+        button#btnLoginSignIn.btnStyle(type='submit', value='Submit') SIGN IN
+        p#orSignUp.underButtonText or
+        p#signUp.underButtonText sign up
       #grid
         #row1
           .box1

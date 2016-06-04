@@ -438,7 +438,13 @@
 	border: 1px #c5c5c5 solid;
 }
 
-#form {
+#form1 {
+	position: absolute;
+	width: 300px;
+	text-align: center;
+}
+
+#form2 {
 	position: absolute;
 	width: 300px;
 	text-align: center;
@@ -533,6 +539,13 @@ input {
 	display: inline-block;
 }
 
+#orSignUp {
+	display: none;
+	cursor: default;
+	padding: 0 0 0 0;
+	margin: 4px 0 0 235px;
+}
+
 #signInDecoration {
 	text-decoration: none;
 	color: #000;
@@ -544,10 +557,22 @@ input {
 	text-align: center;
 	padding: 0 0 0 0;
 	margin: 0 0 0 0;
-	margin: 1px 0 0 224px;
+	margin: 1px 0 0 223px;
 	display: inline-block;
 }
 
 #signIn:hover {
+	cursor: pointer;
+}
+
+#signUp {
+	display: none;
+	text-decoration: none;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+	margin: 1px 0 0 222px;
+}
+
+#signUp:hover {
 	cursor: pointer;
 }

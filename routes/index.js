@@ -28,7 +28,8 @@ function ensureAuthenticated(req, res, next) {
   if(req.isAuthenticated()){
     return next();
   } else {
-    res.redirect('/signin');
+    res.redirect('/signinTrail');
+    //used to be /signin
     console.log('redirecting')
   }
 }
