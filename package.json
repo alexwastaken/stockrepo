@@ -4,7 +4,7 @@
   "description": "newssite",
   "main": "app.js",
   "scripts": {
-    "start": "app.js"
+    "start": "node app.js"
   },
   "author": "alex parsons",
   "license": "ISC",
