@@ -1,43 +1,31 @@
-﻿var express = require('express');
+var express = require('express');
 var router = express.Router();
 
-var people = ''
+var userInfo = '';
 
-/* GET home page. */
-router.get('/signinTrail', ensureAuthenticated, figureOutUser, function (req, res) {
-    res.render('signinlanding', { serverPeople: people });
+
+router.get('/signedin', ensureAuthenticated, figureOutUser, function(req, res, next) {
+  res.render('loggedin.ejs', { serverName: userInfo });
 });
 
-router.get('/signin', function (req, res) {
-	res.render('signinpage');
-});
+router.get('/loggedout', function(req, res){
+  req.logout();
 
-router.get('/', function (req, res) {
-  res.render('landingpage');
-});
-
-router.get('/homepage', function (req, res) {
-  res.render('homepage');
-});
-
-router.get('/stockpage', function (req, res) {
-  res.render('stockpage');
+  res.redirect('/')
 });
 
 function ensureAuthenticated(req, res, next) {
+  console.log(req.isAuthenticated())
   if(req.isAuthenticated()){
     return next();
   } else {
-    res.redirect('/signinTrail');
-    //used to be /signin
-    console.log('redirecting')
+    res.redirect('/');
   }
 }
 
 function figureOutUser(req, res, next) {
-	people = req.user.firstname
+	userInfo = req.user.username
 	next();
-	
 }
 
 module.exports = router;

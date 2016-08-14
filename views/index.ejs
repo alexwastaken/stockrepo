@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>stockdata homepage</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/css/thematchdesign.css">
+    <script src="/javascript/sliderMsg.js"></script>
+    <script src="/javascript/loginsystem.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body id="hideBottomScroll">
+  <script>
+    var socket = io('http://localhost:3000/');
+    socket.on('news', function (data) {
+      console.log(data);
+    });
+  </script>
+    <script src="/javascript/app.js"></script>
+    <script type="text/javascript"><%- JSON.stringify(messages) %></script>
+    <div class="wrapper">
+    <div id="topRated"></div>
+      <div class="header">
+        <div class="headerContent">
+          <div class="imageAlign"><img id="logo" src="images/postrepologo.png"></div>
+          <div id="rightNav">
+            <ul class="ulSettings">
+              <li class="list"><a href="https://www.robinhood.com/" class="linkClass">Developers</a></li>
+              <li class="list"><a href="https://www.robinhood.com/" class="linkClass">Contact</a></li>
+              <li class="list"><a href="https://www.robinhood.com/" class="linkClass">FAQ</a></li>
+            </ul>
+            <button type="button" class="btn">SIGN IN</button>
+          </div>
+        </div>
+      </div>
+      <div id="loginBody">
+        <form id="form1" action="/signup" method="post">
+          <input id="fNameSettings" type="text" name="firstname" placeholder="First" class="boxSettings">
+          <input id="username" type="text" name="username" placeholder="Username" class="boxSettings">
+          <input id="email" type="email" name="email" placeholder="Email" class="boxSettings">
+          <input id="password" type="password" name="password1" placeholder="Password" class="boxSettings">
+          <button id="btnLoginSignUp" type="submit" value="Submit" class="btnStyle">SIGN UP</button>
+          <p id="or" class="underButtonText">or</p>
+          <p id="signIn" class="underButtonText">sign in</p>
+        </form>
+        <form id="form2" action='/signin ', method='post'>
+          <input id="usernameSignIn" type="text" name="username" placeholder="Username" class="boxSettings">
+          <input id="passwordSignIn" type="password" name="password" placeholder="Password" class="boxSettings">
+          <button id="btnLoginSignIn" type="submit" value="Submit" class="btnStyle">SIGN IN</button>
+          <p id="orSignUp" class="underButtonText">or</p>
+          <p id="signUp" class="underButtonText">sign up</p>
+        </form>
+      </div>
+      <div id="backgroundColorLogin"></div>
+    </div>
+  </body>
+</html>
