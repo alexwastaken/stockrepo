@@ -196,4 +196,4 @@ app.post('/signup', function(req, res) {
 
 app.use('/', routes);
 
-server.listen(3000, console.log('Ready to work'));
+server.listen(process.env.PORT || 5000);
