@@ -10,12 +10,12 @@ var session = require('express-session');
 var bcrypt = require('bcryptjs');
 var routes = require('./routes/index');
 var flash = require('connect-flash');
+var http = require('http');
 var socketio = require('socket.io');
 
 var app = express();
-
-var server = require('http').createServer(app)
-var io = require('socket.io').listen(server)
+var server = http.createServer(app);
+var io = socketio(server);
 
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
@@ -108,9 +108,9 @@ var sessionID;
 
 app.get('/', function(req, res, next) {
 
-  res.render('index.ejs')
-
   sessionID = req.session.id;
+  
+  res.render('index.ejs')
 
 });
 
@@ -141,7 +141,7 @@ function findDuplicates(data, sessionID, socket) {
 }
 
 
-io.sockets.on('connection', function (socket) {
+io.on('connection', function (socket) {
   findDuplicates(allConnectionsMatches, sessionID, socket)
 });
 
@@ -196,4 +196,4 @@ app.post('/signup', function(req, res) {
 
 app.use('/', routes);
 
-server.listen(process.env.PORT || 5000);
+server.listen(3000, console.log('Ready to work'));
