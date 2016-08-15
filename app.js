@@ -116,7 +116,7 @@ app.get('/', function(req, res, next) {
 
 function findDuplicates(data, sessionID, socket) {
 
-    var isPositive = data.lastIndexOf(sessionID);
+    var isPositive = data.lastIndexOf(req.session.id);
 
     console.log(isPositive + 'index of session id (http request in array)')
 
