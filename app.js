@@ -6,14 +6,15 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
-var session = require('express-session');
+var Session = require('express-session');
 var bcrypt = require('bcryptjs');
 var routes = require('./routes/index');
 var flash = require('connect-flash');
+var http = require('http');
 var socketio = require('socket.io');
+var ios = require('socket.io-express-session');
 
 var app = express();
-
 var server = require('http').createServer(app)
 var io = require('socket.io').listen(server)
 
@@ -27,15 +28,14 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
+
+var session = Session({
+    secret: 'pass',
     resave: true,
-    cookie: { maxAge : 3600000 }
-}));
+    saveUninitialized: true
+});
 
-var sharedsession = require("express-socket.io-session");
-
+app.use(session);
 
 app.use(flash());
 
@@ -104,46 +104,29 @@ app.post('/signin', passport.authenticate('local', {
 //a string for every http request connected.
 var allConnectionsMatches = [];
 
-var sessionID;
 
 app.get('/', function(req, res, next) {
-
-  sessionID = req.session.id;
-  
+  //we dont need this to get the session id anymore becuase of third part program
+  //put this back in router
   res.render('index.ejs')
 
 });
 
-function findDuplicates(data, sessionID, socket) {
+io.use(ios(session));
 
-    var isPositive = data.lastIndexOf(sessionID);
+io.on('connection', function (socket) {
+  console.log('run')
+  var isPositive = allConnectionsMatches.lastIndexOf(socket.handshake.session.id);
+  if(isPositive === -1){
+    allConnectionsMatches.push(socket.handshake.session.id, socket)
+  } else if(isPositive){
+      allConnectionsMatches.splice(isPositive + 1, 1, socket)
+  } else {
 
-    console.log(isPositive + 'index of session id (http request in array)')
+  }
 
-    if (isPositive === true) {
-      //checks if http request is found
-
-      var socketLocation = allConnectionsMatches.indexOf(sessionID);
-
-      socketLocation + 1;
-
-      allConnectionsMatches.splice(socketLocation, 1, socket)
-
-      //find the http request find the old socket and replace it with the new one
-    } else if(isPositive === -1) {
-      console.log(socket + 'function socket')
-      //fix the NAN bug so every time you refresh the page you will always get a id pair
-      data.push(sessionID, socket);
-    } else {
-      
-    }
-
-}
-
-
-io.sockets.on('connection', function (socket) {
-  findDuplicates(allConnectionsMatches, sessionID, socket)
 });
+
 
 app.post('/signup', function(req, res) {
 
