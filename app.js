@@ -154,12 +154,12 @@ app.post('/signup', function(req, res) {
     }, function(err, user) {
         if (user) {
             if (user.username === req.body.username) {
-              postSocket.emit('news', 'hello, how are you username');
+              postSocket.emit('news', 'that username is taken');
               console.log('username is taken');
             } else {
             }
             if (user.email === req.body.email) {
-              postSocket.emit('news', 'hello, how are you email');
+              postSocket.emit('news', 'that email is taken');
               console.log('email is taken')
             } else {}
         } else {
