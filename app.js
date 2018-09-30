@@ -47,7 +47,7 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect('mongodb://stockdatauserdb:whee1234@ds032319.mlab.com:32319/accountdatabase');
+mongoose.connect('mongodb://stockdatauserdb:pasw11@ds032319.mlab.com:32319/accountdatabase');
 
 var Schema = mongoose.Schema;
 
@@ -130,7 +130,7 @@ io.on('connection', function (socket) {
 
 app.post('/signup', function(req, res) {
 
-    console.log('REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
+    console.log('something')
 
     var sessionPlaceInArray = allConnectionsMatches.indexOf(req.session.id);
 
@@ -174,7 +174,7 @@ app.post('/signup', function(req, res) {
             return done(err);
         }
     });
-    console.log('R222222222222222222222222222222222222222222222222222222222')
+    console.log('somethingagain')
 });
 
 app.use('/', routes);
